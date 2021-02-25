@@ -6,7 +6,6 @@ import bundleSize from 'rollup-plugin-bundle-size';
 import replace from '@rollup/plugin-replace';
 import svgr from '@svgr/rollup';
 import typescript from 'rollup-plugin-typescript2';
-import { DEFAULT_EXTENSIONS as DEFAULT_BABEL_EXTENSIONS } from '@babel/core';
 
 import pkg from './package.json';
 
@@ -30,16 +29,7 @@ export const baseConfig = ({ mainFile = pkg.main, moduleFile = pkg.module, injec
       exports: 'named',
       plugins: [
         getBabelOutputPlugin({
-          extensions: [...DEFAULT_BABEL_EXTENSIONS, 'ts', 'tsx'],
-          presets: [
-            [
-              '@babel/preset-env',
-              {
-                modules: false,
-              },
-            ],
-            '@babel/preset-react',
-          ],
+          presets: [['@babel/preset-env',{modules: false}],'@babel/preset-react'],
           plugins: ['@babel/transform-runtime'],
         }),
       ],
